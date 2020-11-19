@@ -1,17 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import { BrowserRouter as Router} from 'react-router-dom';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import "bootstrap/dist/css/bootstrap.css";
+import "./hotstar.css";
+
+import "jquery/dist/jquery";
+import "popper.js/dist/popper";
+import "bootstrap/dist/js/bootstrap.js";
+
+import App from "./App";
+
+ReactDOM.render(<Router><App/></Router>, document.querySelector("#root"));
