@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
 
+import { toast } from "react-toastify";
+import md5 from "md5";
+
 import firebase from "../../firebase";
 
 import { Link } from "react-router-dom";
@@ -27,7 +30,15 @@ class Register extends Component {
       
         //connecting firebase auth provider
         let userData = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        console.log(userData);
+
+        userData.user.sendEmailVerification();
+        toast.success(`A verification email has been sent to ${email} and please verify your email address`);
+
+        //update profile including user photo, phone number, id whatever
+        await userData.user.updateProfile({
+            displayName : username,
+            photoURL : `https://www.gravatar.com/avatar/${md5(userData.user.email)}?d=identicon`,
+        });
 
       this.setState({
         username: "",
@@ -37,6 +48,7 @@ class Register extends Component {
       });
     } catch (err) {
       console.log(err);
+      toast.error(err.message);
     }
   };
 

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './HotStarComponents/AuthComponent/Login';
 import Register from './HotStarComponents/AuthComponent/Register';
@@ -20,6 +20,7 @@ class App extends Component {
                     <HeaderComponent/>
                 </header>
                 <main>
+                    <ToastContainer/>
                     <Switch>
                         <Route path="/login" exact component={Login}/>
                         <Route path="/register" exact component={Register}/>
