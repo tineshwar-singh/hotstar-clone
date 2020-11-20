@@ -40,6 +40,17 @@ class Register extends Component {
             photoURL : `https://www.gravatar.com/avatar/${md5(userData.user.email)}?d=identicon`,
         });
 
+        //store user information in RealTime Database
+        //should have to config real time firebase database 
+        //connect firebase realtime database
+        await firebase.database().ref().child(userData.user.displayName).set({
+            email : userData.user.email,
+            displayName : userData.user.displayName,
+            photoURL : userData.user.photoURL,
+            uid : userData.user.uid,
+            registrationDate : new Date().toString(),
+        });
+        
       this.setState({
         username: "",
         email: "",
