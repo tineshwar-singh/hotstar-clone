@@ -30,6 +30,7 @@ class Register extends Component {
       
         //connecting firebase auth provider
         let userData = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        console.log(userData);
 
         userData.user.sendEmailVerification();
         toast.success(`A verification email has been sent to ${email} and please verify your email address`);
@@ -38,6 +39,7 @@ class Register extends Component {
         await userData.user.updateProfile({
             displayName : username,
             photoURL : `https://www.gravatar.com/avatar/${md5(userData.user.email)}?d=identicon`,
+            // phoneNumber : phone,
         });
 
         //store user information in RealTime Database
@@ -45,6 +47,7 @@ class Register extends Component {
         //connect firebase realtime database
         await firebase.database().ref().child(userData.user.displayName).set({
             email : userData.user.email,
+            // phoneNumber : userData.user.phoneNumber,
             displayName : userData.user.displayName,
             photoURL : userData.user.photoURL,
             uid : userData.user.uid,
